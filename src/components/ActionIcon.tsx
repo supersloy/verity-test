@@ -1,11 +1,22 @@
 import {
   ActionIconProps,
   ActionIcon as MantineActionIcon,
+  PolymorphicComponentProps,
   useComputedColorScheme,
 } from '@mantine/core';
 
-export function ActionIcon(props: ActionIconProps) {
+type MyActionIconProps = PolymorphicComponentProps<'button', ActionIconProps> & {
+  selected?: boolean;
+};
+
+export function SelectableIcon(props: MyActionIconProps) {
   const computedColorScheme = useComputedColorScheme('dark', { getInitialValueInEffect: true });
-  const color = computedColorScheme === 'light' ? 'black' : 'gray';
-  return <MantineActionIcon {...props} variant="outline" color={color} />;
+  let color = computedColorScheme === 'light' ? 'black' : 'gray';
+  let { disabled } = props;
+  if (props.selected) {
+    color = 'grape';
+    disabled = false;
+  }
+
+  return <MantineActionIcon {...props} disabled={disabled} variant="outline" color={color} />;
 }

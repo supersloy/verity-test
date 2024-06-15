@@ -1,6 +1,6 @@
 import { create } from 'zustand';
 import { shuffle } from 'lodash-es';
-import { Shape2D } from './types';
+import { Position, Shape2D } from './types';
 import { shapes2D } from './utils';
 
 type MainCalloutStore = {
@@ -32,19 +32,12 @@ function getRandomLayout() {
   };
 }
 
-function setShape(shape: Shape2D, position: 'left' | 'center' | 'right') {
+function setShape(shape: Shape2D, position: Position) {
   useMainCalloutStore.setState((state) => ({ ...state, [position]: shape }));
 }
 
-function removeShape(position: 'left' | 'center' | 'right') {
+function removeShape(position: Position) {
   useMainCalloutStore.setState((state) => ({ ...state, [position]: undefined }));
 }
 
-export {
-  useMainCalloutStore,
-  getRemainingShapes,
-  setShape,
-  removeShape,
-  setRandomLayout,
-  getRandomLayout,
-};
+export { useMainCalloutStore, getRemainingShapes, setShape, removeShape, setRandomLayout };

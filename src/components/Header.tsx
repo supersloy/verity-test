@@ -13,7 +13,7 @@ export function Header() {
           variant="gradient"
           gradient={{ from: 'red', to: 'green', deg: 114 }}
         >
-          Verity skill check
+          Verity playground
         </Text>
         <ThemeToggle />
       </Group>
