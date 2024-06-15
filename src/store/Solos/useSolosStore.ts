@@ -21,11 +21,23 @@ type SolosStore = {
     Center?: Position;
     Right?: Position;
   };
+  gameInfo: {
+    shapeSelections: number;
+    guardianSelections: number;
+    startTime?: Date;
+    endTime?: Date;
+    isCorrect: boolean;
+  };
 };
 
 const useSolosStore = create<SolosStore>(() => ({
   stack: getRandomStacks(),
   selectedGuardian: {},
+  gameInfo: {
+    shapeSelections: 0,
+    guardianSelections: 0,
+    isCorrect: false,
+  },
 }));
 
 function getRandomStacks() {
@@ -51,9 +63,9 @@ function getRandomStacks() {
   return newStack;
 }
 
-function setRandomStacks() {
+function startSolos() {
   useSolosStore.setState((state) => ({ ...state, stack: getRandomStacks(), selectedGuardian: {} }));
 }
 
-export { useSolosStore, getRandomStacks, setRandomStacks };
+export { useSolosStore, getRandomStacks, startSolos };
 export type { Shape2DInfo };

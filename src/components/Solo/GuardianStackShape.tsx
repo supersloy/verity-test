@@ -1,7 +1,7 @@
 import { useCallback } from 'react';
 import { Center, Stack, Text } from '@mantine/core';
 import { Position } from '@/store/types';
-import { SelectableIcon } from '../ActionIcon';
+import { SelectableIcon } from '../SelectableIcon';
 import { IconMapping } from '@/store/utils';
 import { selectShape } from '@/store/Solos/select.actions';
 import { useSolosStore } from '@/store/Solos/useSolosStore';

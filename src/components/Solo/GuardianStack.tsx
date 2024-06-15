@@ -20,16 +20,32 @@ export function GuardianStack({ position }: GuardianStackProps) {
           Stack
         </Title>
         <Group wrap="wrap" justify="space-evenly">
-          <Group justify="space-evenly">
+          <Group justify="space-evenly" wrap="nowrap" visibleFrom="xs">
             {range(3).map((ind) => (
               <GuardianStackShape key={ind} index={ind} position={position} />
             ))}
           </Group>
-          <Group justify="space-evenly">
+          <Group justify="space-evenly" wrap="nowrap" visibleFrom="xs">
             {range(3, 6).map((ind) => (
               <GuardianStackShape key={ind} index={ind} position={position} />
             ))}
           </Group>
+
+          <Group justify="space-evenly" wrap="nowrap" hiddenFrom="xs">
+            {range(2).map((ind) => (
+              <GuardianStackShape key={ind} index={ind} position={position} />
+            ))}
+          </Group>
+          <Group justify="space-evenly" wrap="nowrap" hiddenFrom="xs">
+            {range(2, 4).map((ind) => (
+              <GuardianStackShape key={ind} index={ind} position={position} />
+            ))}
+          </Group>
+        </Group>
+        <Group justify="space-evenly" wrap="nowrap" hiddenFrom="xs">
+          {range(4, 6).map((ind) => (
+            <GuardianStackShape key={ind} index={ind} position={position} />
+          ))}
         </Group>
       </Stack>
     </Paper>

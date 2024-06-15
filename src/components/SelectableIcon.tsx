@@ -5,11 +5,11 @@ import {
   useComputedColorScheme,
 } from '@mantine/core';
 
-type MyActionIconProps = PolymorphicComponentProps<'button', ActionIconProps> & {
+type SelectableIconProps = PolymorphicComponentProps<'button', ActionIconProps> & {
   selected?: boolean;
 };
 
-export function SelectableIcon(props: MyActionIconProps) {
+export function SelectableIcon(props: SelectableIconProps) {
   const computedColorScheme = useComputedColorScheme('dark', { getInitialValueInEffect: true });
   let color = computedColorScheme === 'light' ? 'black' : 'gray';
   let { disabled } = props;

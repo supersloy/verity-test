@@ -6,8 +6,8 @@ export function MainCallout() {
   const { Left: left, Center: center, Right: right } = useMainCalloutStore();
 
   return (
-    <Center mt="lg">
-      <Paper withBorder w="auto" display="inline-block">
+    <Center>
+      <Paper withBorder w="300px" display="inline-block">
         <Stack gap={0} align="center">
           <Title>Main callouts</Title>
           <Group m="sm">

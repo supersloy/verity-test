@@ -2,7 +2,7 @@ import { IconUser } from '@tabler/icons-react';
 import { useMemo } from 'react';
 import { selectGuardian } from '@/store/Solos/select.actions';
 import { Position } from '@/store/types';
-import { SelectableIcon } from '../ActionIcon';
+import { SelectableIcon } from '../SelectableIcon';
 import { useSolosStore } from '@/store/Solos/useSolosStore';
 import { isGuardianSelectable } from '@/store/Solos/selectableIndicators';
 
