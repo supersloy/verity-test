@@ -3,7 +3,7 @@ import { Shape2DCard } from './Shape2DButton';
 import { useMainCalloutStore } from '@/store/useMainCalloutStore';
 
 export function MainCallout() {
-  const { left, center, right } = useMainCalloutStore();
+  const { Left: left, Center: center, Right: right } = useMainCalloutStore();
 
   return (
     <Center mt="lg">

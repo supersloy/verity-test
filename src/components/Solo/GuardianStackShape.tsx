@@ -1,4 +1,5 @@
 import { useCallback } from 'react';
+import { Center, Stack, Text } from '@mantine/core';
 import { Position } from '@/store/types';
 import { SelectableIcon } from '../ActionIcon';
 import { IconMapping } from '@/store/utils';
@@ -21,10 +22,22 @@ export function GuardianStackShape({ index, position }: GuardianStackShapeProps)
   if (shapeInfo?.shape != null) {
     const ShapeIcon = IconMapping[shapeInfo.shape];
     return (
-      <SelectableIcon onClick={onClick} selected={shapeInfo.selected} disabled={!selectable}>
-        <ShapeIcon />
-      </SelectableIcon>
+      <Stack gap={0}>
+        <Center>
+          <Text size="xs">{index + 1}</Text>
+        </Center>
+        <SelectableIcon onClick={onClick} selected={shapeInfo.selected} disabled={!selectable}>
+          <ShapeIcon />
+        </SelectableIcon>
+      </Stack>
     );
   }
-  return <SelectableIcon disabled></SelectableIcon>;
+  return (
+    <Stack gap={0}>
+      <Center>
+        <Text size="xs">{index + 1}</Text>
+      </Center>
+      <SelectableIcon disabled />
+    </Stack>
+  );
 }

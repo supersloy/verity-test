@@ -1,7 +1,8 @@
-import { shuffle, slice } from 'lodash';
-import { Position, Shape, Shape2D } from '../types';
+/* eslint-disable no-continue */
+import { Position, Shape } from '../types';
 import { get3DShapeFromBases } from '../utils';
 import { Shape2DInfo, useSolosStore } from './useSolosStore';
+import { useMainCalloutStore } from '../useMainCalloutStore';
 
 function appendToStack(recieverGuardian: Position, shape: Shape2DInfo) {
   useSolosStore.setState((state) => ({
@@ -41,26 +42,26 @@ function getSelectedShape(position: Position): Shape | undefined {
   return get3DShapeFromBases([base1.shape, base2.shape]);
 }
 
-function generateRandomStacks() {
-  let commonStack = ['Circle', 'Square', 'Triangle', 'Circle', 'Square', 'Triangle'] as Shape2D[];
-  commonStack = shuffle(commonStack);
-
-  function shapeToInfo(shape: Shape2D, position: Position): Shape2DInfo {
-    return { shape, origin: position, selected: false };
-  }
-
-  const newStack = {
-    Left: slice(commonStack, 0, 2).map((shape) => shapeToInfo(shape, 'Left')),
-    Center: slice(commonStack, 2, 4).map((shape) => shapeToInfo(shape, 'Center')),
-    Right: slice(commonStack, 4, 6).map((shape) => shapeToInfo(shape, 'Right')),
-  };
-  useSolosStore.setState((state) => ({ ...state, stack: newStack }));
-}
-
 function handOverShape(from: Position, to: Position, shapeIndex: number) {
   const shape = useSolosStore.getState().stack[from][shapeIndex];
   removeFromStack(from, shapeIndex);
   appendToStack(to, shape);
+}
+
+function isStackCorrect(position: Position): boolean {
+  const stack = useSolosStore.getState().stack[position];
+  if (stack.length !== 2) return false;
+  const mainShape = useMainCalloutStore.getState()[position];
+  if (new Set([mainShape, ...stack.map((s) => s.shape)]).size !== 3) return false;
+  if (stack.filter((s) => !s.cleansed).length !== 0) return false;
+  return true;
+}
+
+function isGuardianCorrect(position: Position): boolean {
+  const stackCorrect = isStackCorrect(position);
+  if (!stackCorrect) return false;
+  const stack = useSolosStore.getState().stack[position];
+  return stack.filter((s) => s.selected).length === 2;
 }
 
 export {
@@ -68,6 +69,7 @@ export {
   removeFromStack,
   getSelectedShape,
   getPositionInfo,
-  generateRandomStacks,
   handOverShape,
+  isStackCorrect,
+  isGuardianCorrect,
 };

@@ -4,17 +4,17 @@ import { Position, Shape2D } from './types';
 import { shapes2D } from './utils';
 
 type MainCalloutStore = {
-  left: Shape2D;
-  center: Shape2D;
-  right: Shape2D;
+  Left: Shape2D;
+  Center: Shape2D;
+  Right: Shape2D;
 };
 
 const useMainCalloutStore = create<MainCalloutStore>(getRandomLayout);
 
 function getRemainingShapes(): Shape2D[] {
-  const { left, center, right } = useMainCalloutStore.getState();
+  const { Left, Center, Right } = useMainCalloutStore.getState();
   const remainingShapes = shapes2D.filter(
-    (shape) => shape !== left && shape !== center && shape !== right
+    (shape) => shape !== Left && shape !== Center && shape !== Right
   );
   return remainingShapes;
 }
@@ -23,12 +23,12 @@ function setRandomLayout() {
   useMainCalloutStore.setState(getRandomLayout);
 }
 
-function getRandomLayout() {
+function getRandomLayout(): MainCalloutStore {
   const permutation = shuffle(shapes2D);
   return {
-    left: permutation[0],
-    center: permutation[1],
-    right: permutation[2],
+    Left: permutation[0],
+    Center: permutation[1],
+    Right: permutation[2],
   };
 }
 

@@ -27,6 +27,9 @@ function selectGuardian(position: Position, guardian: Position) {
         stack[i].selected = false;
       }
     }
+    if (selectedIndexes.length === 1) {
+      stack[selectedIndexes[0]].cleansed = true;
+    }
     useSolosStore.setState((state) => ({
       ...state,
       selectedGuardian: { [position]: undefined },
@@ -34,10 +37,6 @@ function selectGuardian(position: Position, guardian: Position) {
     }));
     if (selectedIndexes.length === 1) {
       handOverShape(position, guardian, selectedIndexes[0]);
-    }
-    if (selectedIndexes.length === 2) {
-      handOverShape(position, position, selectedIndexes[0]);
-      handOverShape(position, position, selectedIndexes[0]);
     }
   }, 250);
 }
